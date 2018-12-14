@@ -95,7 +95,18 @@ public class ProductController {
         productDao.save(product);
     }
 
+    /**
+     *  calculerMargeProduit
+     * @param unProduit
+     * @return la marge d'un produit
+     */
+    public int calculerMargeProduit(@RequestBody Product unProduit) {
+        Product produit = unProduit;
 
+        int marge = produit.getPrix() - produit.getPrixAchat();
+
+        return marge;
+    }
     //Pour les tests
     @GetMapping(value = "test/produits/{prix}")
     public List<Product>  testeDeRequetes(@PathVariable int prix) {
