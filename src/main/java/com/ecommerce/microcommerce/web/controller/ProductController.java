@@ -100,13 +100,23 @@ public class ProductController {
      * @param unProduit
      * @return la marge d'un produit
      */
-    public int calculerMargeProduit(@RequestBody Product unProduit) {
-        Product produit = unProduit;
+    @RequestMapping(value = "/AdminProduits", method = RequestMethod.GET)
+    public int calculerMargeProduits(@RequestBody Product unProduit) {
 
-        int marge = produit.getPrix() - produit.getPrixAchat();
+        List<Product> produits =  productDao.findAll();
+
+        for(Product p: produits) {
+            int marge = p.getPrix() - p.getPrixAchat();
+
+        }
 
         return marge;
     }
+
+    public List<Product> trierProduitsParOrdreAlphabetique() {
+        List<Product> unsort =  productDao.findAll();
+    }
+
     //Pour les tests
     @GetMapping(value = "test/produits/{prix}")
     public List<Product>  testeDeRequetes(@PathVariable int prix) {
