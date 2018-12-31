@@ -97,8 +97,8 @@ public class ProductController {
     }
 
     /**
-     *  calculerMargeProduit
-     * @return la marge d'un produit
+     *  calculerMargeProduits
+     * @return la marge de chacun des produits
      */
     @RequestMapping(value = "/AdminProduits", method = RequestMethod.GET)
     public HashMap<Product, Integer> calculerMargeProduits() {
