@@ -114,9 +114,9 @@ public class ProductController {
         return res;
     }
 
+    @GetMapping(value = "/Produits/abc")
     public List<Product> trierProduitsParOrdreAlphabetique() {
-        List<Product> unsort =  productDao.findAll();
-        return null; //todo
+        return productDao.trierParOrdreAlphabetique();
     }
 
     //Pour les tests
