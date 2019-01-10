@@ -22,12 +22,10 @@ public class TestProductController {
     @Autowired
     ProductController controller;
 
-    private static ArrayList<Product> listeProduits;
-    private static Product produit;
-    private static Product produit2;
-    private static Product produit3;
-    private static Product produit4;
-    private static Product produit5;
+    private ArrayList<Product> listeProduits;
+    private Product produit;
+    private Product produit2;
+    private Product produit3;
 
     @Before
     public void setUp() {
