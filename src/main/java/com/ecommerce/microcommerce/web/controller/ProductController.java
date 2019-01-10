@@ -16,6 +16,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -56,7 +57,6 @@ public class ProductController {
     public Product afficherUnProduit(@PathVariable int id) {
 
         Product produit = productDao.findById(id);
-
         if(produit==null) throw new ProduitIntrouvableException("Le produit avec l'id " + id + " est INTROUVABLE. Écran Bleu si je pouvais.");
 
         return produit;
@@ -101,17 +101,18 @@ public class ProductController {
      * @return la marge de chacun des produits
      */
     @RequestMapping(value = "/AdminProduits", method = RequestMethod.GET)
-    public HashMap<Product, Integer> calculerMargeProduits() {
-        HashMap<Product, Integer> res = new HashMap<>();
-        List<Product> produits =  productDao.findAll();
+    public MappingJacksonValue calculerMargeProduits() {
+        ArrayList<String> marges = new ArrayList<>();
+        Iterable<Product> produits =  productDao.findAll();
         int marge;
 
         for(Product p: produits) {
+            System.out.println(p);
             marge = p.getPrix() - p.getPrixAchat();
-            res.put(p, marge);
+            marges.add(p.toString()+':'+marge);
         }
 
-        return res;
+        return new MappingJacksonValue(marges);
     }
 
     @GetMapping(value = "/Produits/abc")
