@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 
@@ -116,8 +116,13 @@ public class ProductController {
     }
 
     @GetMapping(value = "/Produits/abc")
-    public List<Product> trierProduitsParOrdreAlphabetique() {
-        return productDao.trierParOrdreAlphabetique();
+    public MappingJacksonValue trierProduitsParOrdreAlphabetique() {
+
+        Iterable<Product> sorted = productDao.findAll(new Sort("nom"));
+        for (Product p: sorted) {
+            System.out.println(p.toString());
+        }
+        return new MappingJacksonValue(productDao.findAll(new Sort("nom")));
     }
 
     //Pour les tests
