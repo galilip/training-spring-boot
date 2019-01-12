@@ -1,0 +1,107 @@
+{
+	"info": {
+		"_postman_id": "156072be-b8a1-4364-98a8-17a15efa2396",
+		"name": "MicroCommerceApplication",
+		"description": "## MicroCommerceApplication collection \n# testing rest api route featuring SpringBoot",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Affichage de la marge - Partie 1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:9090/AdminProduits",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"AdminProduits"
+					]
+				},
+				"description": "/AdminProduit route display all the products with the associated \"marge\""
+			},
+			"response": []
+		},
+		{
+			"name": "Tri alphabétique - Partie 2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:9090/Produits/abc",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"Produits",
+						"abc"
+					]
+				},
+				"description": "/Produits/abc display all the products ordered by name"
+			},
+			"response": []
+		},
+		{
+			"name": "Chercher produit cher",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:9090/test/produits/600",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"test",
+						"produits",
+						"600"
+					]
+				},
+				"description": "/test/produits/{prix} return a expensive product"
+			},
+			"response": []
+		},
+		{
+			"name": "Test Ajout Produit",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:9090/test/produits/add/25",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"test",
+						"produits",
+						"add",
+						"25"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

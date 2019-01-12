@@ -138,6 +138,11 @@ public class ProductController {
 
         return productDao.chercherUnProduitCher(prix);
     }
+    @GetMapping(value = "test/produits/add/{id}")
+    public MappingJacksonValue testAjoutProduit(@PathVariable int id) {
+        Product p1 = new Product(id, "Brocolis", 10, 5);
+        return new MappingJacksonValue(ajouterProduit(p1).getStatusCodeValue());
+    }
 
 
 
