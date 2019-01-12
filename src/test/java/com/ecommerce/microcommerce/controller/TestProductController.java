@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.validation.ConstraintViolationException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,6 +29,7 @@ public class TestProductController {
     private Product produit;
     private Product produit2;
     private Product produit3;
+    private Product produitGratuit;
 
     @Before
     public void setUp() {
@@ -37,6 +39,8 @@ public class TestProductController {
         produit = new Product(1, "Ordinateur portable", 350, 120);
         produit2 = new Product(2, "Aspirateur Robot", 500,200);
         produit3 = new Product(3, "Table de Ping Pong", 750, 450);
+
+        produitGratuit = new Product(4, "Brocolis", 0, 4);
 
         listeProduits.add(produit);
         listeProduits.add(produit2);
@@ -80,5 +84,10 @@ public class TestProductController {
         assertEquals(expected.getValue().toString(), sorted.getValue().toString());
         // test nont trié
         assertNotEquals(expected.getValue().toString(), unsorted.getValue().toString());
+    }
+
+    @Test(expected = ConstraintViolationException.class)
+    public void testProduitGratuitException() {
+        controller.ajouterProduit(produitGratuit);
     }
 }
