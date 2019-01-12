@@ -105,6 +105,7 @@ public class ProductController {
      *  calculerMargeProduits
      * @return la marge de chacun des produits
      */
+    @ApiOperation(value = "Méthode permettant de calculer les marges des produits")
     @RequestMapping(value = "/AdminProduits", method = RequestMethod.GET)
     public MappingJacksonValue calculerMargeProduits() {
         ArrayList<String> marges = new ArrayList<>();
@@ -120,6 +121,7 @@ public class ProductController {
         return new MappingJacksonValue(marges);
     }
 
+    @ApiOperation(value = "Méthode permettant de trier les produits par ordre alphabétique")
     @GetMapping(value = "/Produits/abc")
     public MappingJacksonValue trierProduitsParOrdreAlphabetique() {
 
