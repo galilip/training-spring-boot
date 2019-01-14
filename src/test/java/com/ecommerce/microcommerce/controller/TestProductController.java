@@ -4,6 +4,8 @@ import static org.junit.Assert.assertNotEquals;
 
 import com.ecommerce.microcommerce.model.Product;
 import com.ecommerce.microcommerce.web.controller.ProductController;
+import com.ecommerce.microcommerce.web.exceptions.ProduitGratuitException;
+import com.ecommerce.microcommerce.web.exceptions.ProduitIntrouvableException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,8 +16,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.validation.ConstraintViolationException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -30,6 +30,7 @@ public class TestProductController {
     private Product produit2;
     private Product produit3;
     private Product produitGratuit;
+    private Product produitIntrouvable;
 
     @Before
     public void setUp() {
@@ -41,6 +42,7 @@ public class TestProductController {
         produit3 = new Product(3, "Table de Ping Pong", 750, 450);
 
         produitGratuit = new Product(4, "Brocolis", 0, 4);
+        produitIntrouvable = new Product(5, "S.Perennes", 42, 41);
 
         listeProduits.add(produit);
         listeProduits.add(produit2);
@@ -56,6 +58,25 @@ public class TestProductController {
     public void contextLoads() {
     }
 
+    /**
+     * Product's List
+     * @result la liste des produits
+     */
+    @Test
+    public void testListeProduits() {
+        MappingJacksonValue expected = new MappingJacksonValue(listeProduits);
+        assertEquals(expected.getValue().toString(), controller.listeProduits().getValue().toString());
+    }
+
+    /**
+     * Single Product display
+     * @result un produit
+     */
+    @Test
+    public void testAfficherProduit() {
+        MappingJacksonValue expected = new MappingJacksonValue(produit);
+        assertEquals(expected.getValue().toString(), controller.afficherUnProduit(1).toString());
+    }
     @Test
     public void testCalculerMargeProduit() {
         MappingJacksonValue produits = controller.calculerMargeProduits();
@@ -89,5 +110,10 @@ public class TestProductController {
     @Test(expected = ConstraintViolationException.class)
     public void testProduitGratuitException() {
         controller.ajouterProduit(produitGratuit);
+    }
+
+    @Test(expected = ProduitIntrouvableException.class)
+    public void testProduitIntrouvableException() {
+        controller.afficherUnProduit(5);
     }
 }
